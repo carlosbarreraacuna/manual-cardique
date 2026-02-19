@@ -137,13 +137,7 @@ Desktop.ini
 *.ico
 *.webp
 
-# Videos
-videos/
-*.mp4
-*.mov
-*.avi
-*.mkv
-*.webm
+
 
 # Archivos de documentación
 *.md

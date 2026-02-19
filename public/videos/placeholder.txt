@@ -1,0 +1,15 @@
+Este directorio contendrá los videos para el manual interactivo.
+
+Para agregar un video de fondo:
+1. Coloca el archivo video en este directorio
+2. Nombra el archivo: background.mp4
+3. El video debe ser optimizado para web (preferiblemente <10MB)
+4. Formatos recomendados: MP4 (H.264)
+5. Resolución recomendada: 1920x1080 o menor
+6. El video debe tener un bucle fluido y ser apropiado para fondo
+
+Ejemplo de contenido para el video:
+- Animación sutil de libros o biblioteca
+- Movimiento suave de documentos digitales
+- Efectos abstractos relacionados con lectura/educación
+- Gradientes animados con colores institucionales
