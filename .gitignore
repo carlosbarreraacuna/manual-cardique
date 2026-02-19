@@ -114,28 +114,9 @@ Thumbs.db
 ehthumbs.db
 Desktop.ini
 
-# Git LFS
-*.mp4
-*.mov
-*.avi
-*.mkv
-*.webm
-*.pdf
-*.docx
-*.doc
-*.xlsx
-*.xls
-*.pptx
-*.ppt
 
-# Imágenes grandes que deben estar en LFS
-*.jpg
-*.jpeg
-*.png
-*.gif
-*.svg
-*.ico
-*.webp
+
+
 
 
 
