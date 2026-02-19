@@ -4,6 +4,7 @@ import { Target, ChevronLeft, ChevronRight } from 'lucide-react'
 import { Step } from '@/data/manualRoutes'
 import { Checklist } from './Checklist'
 import { ImageGuide } from './ImageGuide'
+import { VideoGuide } from './VideoGuide'
 
 interface StepCardProps {
   step: Step
@@ -68,12 +69,19 @@ export function StepCard({ step, animationDirection, onPrevious, onNext, isFirst
             </section>
           </div>
 
-          {/* Imagen - Lado derecho */}
+          {/* Imagen/Video - Lado derecho */}
           <section>
-            <ImageGuide 
-              src={step.image} 
-              alt={step.imageAlt}
-            />
+            {step.image.includes('.mp4') || step.image.includes('.mov') || step.image.includes('.avi') ? (
+              <VideoGuide 
+                src={step.image} 
+                title={step.imageAlt}
+              />
+            ) : (
+              <ImageGuide 
+                src={step.image} 
+                alt={step.imageAlt}
+              />
+            )}
           </section>
         </div>
       </div>

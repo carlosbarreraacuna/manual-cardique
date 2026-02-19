@@ -39,8 +39,8 @@ export const manualRoutes: Route[] = [
           { id: 'acceso-1-5', text: 'Hacer clic en el enlace de la Biblioteca Digital', completed: false }
         ],
         expectedResult: 'Acceso a la sección de Accesos Rápidos y enlace a la Biblioteca Digital',
-        image: '/images/cardique-accesos-rapidos.png',
-        imageAlt: 'Página principal de CARDIQUE con sección de Accesos Rápidos resaltada'
+        image: '/videos/paso1.mp4',
+        imageAlt: 'Video demostrativo del acceso a la Biblioteca Digital CARDIQUE'
       },
       {
         id: 'acceso-2',
