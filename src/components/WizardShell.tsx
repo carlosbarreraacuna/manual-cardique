@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { Menu, X, CheckCircle } from 'lucide-react'
+import { Menu, X, Check, ChevronRight, CheckCircle } from 'lucide-react'
 import { ProgressSidebar } from './ProgressSidebar'
 import { StepCard } from './StepCard'
 import { Route, Step } from '@/data/manualRoutes'
@@ -167,7 +167,9 @@ export function WizardShell({
 
   return (
     <div className="min-h-screen bg-deep-teal-50 flex flex-col">
-      <header className="bg-white border-b border-deep-teal-100 px-4 py-4 sticky top-0 z-30 ml-80">
+      <header className={`bg-white border-b border-deep-teal-100 px-4 py-4 sticky top-0 z-30 transition-all duration-300 ${
+          isMobileMenuOpen ? 'ml-0 lg:ml-80' : 'ml-0 lg:ml-80'
+        }`}>
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <div className="flex items-center">
             <button
@@ -210,27 +212,118 @@ export function WizardShell({
       <div className="flex flex-1 relative">
         {/* Mobile Progress Drawer */}
         {isMobileMenuOpen && (
-          <>
-            <div
-              className="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden"
-              onClick={() => setIsMobileMenuOpen(false)}
-            />
-            <div className="fixed inset-y-0 left-0 w-80 bg-white z-50 lg:hidden transform transition-transform duration-300 ease-in-out">
-              <ProgressSidebar
-                steps={selectedRoute?.steps || []}
-                currentStepIndex={currentStepIndex}
-                onStepClick={(index) => {
-                  onStepClick(index)
+          <div className="fixed inset-y-0 left-0 w-80 bg-white z-30 transform transition-transform duration-300 ease-in-out">
+            {/* Header del drawer mobile con botón cerrar */}
+            <div className="flex items-center justify-between p-4 border-b border-deep-teal-100">
+              <h2 className="text-lg font-bold text-deep-teal-800">
+                Manual interactivo
+              </h2>
+              <button
+                onClick={(e) => {
+                  e.preventDefault()
+                  e.stopPropagation()
                   setIsMobileMenuOpen(false)
                 }}
-                routeName={selectedRoute?.name || ''}
-              />
+                className="p-2 rounded-lg hover:bg-deep-teal-100 transition-colors"
+                aria-label="Cerrar menú"
+              >
+                <X className="w-6 h-6 text-deep-teal-600" />
+              </button>
             </div>
-          </>
+              
+              {/* Contenido del sidebar sin el header duplicado */}
+              <div className="p-6">
+                <h3 className="text-base font-semibold text-deep-teal-700 mb-2">
+                  Ruta: {selectedRoute?.name || ''}
+                </h3>
+                <div className="text-sm text-deep-teal-600 mb-4">
+                  Paso {currentStepIndex + 1} de {selectedRoute?.steps?.length || 0}
+                </div>
+                
+                <div className="w-full bg-deep-teal-200 rounded-full h-2 mb-6">
+                  <div
+                    className="bg-medium-jungle-600 h-2 rounded-full transition-all duration-300 ease-out"
+                    style={{ width: `${((currentStepIndex + 1) / (selectedRoute?.steps?.length || 1)) * 100}%` }}
+                  />
+                </div>
+
+                <nav aria-label="Progreso del wizard">
+                  <ul className="space-y-2">
+                    {selectedRoute?.steps?.map((step, index) => {
+                      const isStepCompleted = step.checklist.every(item => item.completed)
+                      const isStepActive = index === currentStepIndex
+                      const isStepAccessible = index <= currentStepIndex || isStepCompleted
+
+                      return (
+                        <li key={step.id}>
+                          <button
+                            onClick={() => {
+                              onStepClick(index)
+                              setIsMobileMenuOpen(false)
+                            }}
+                            disabled={!isStepAccessible}
+                            className={`w-full text-left p-3 rounded-lg transition-all duration-200 ${
+                              isStepActive
+                                ? 'bg-deep-teal-100 border-2 border-deep-teal-300'
+                                : isStepCompleted
+                                ? 'bg-medium-jungle-50 border-2 border-medium-jungle-300'
+                                : 'bg-deep-teal-50 border-2 border-transparent'
+                            } ${
+                              isStepAccessible
+                                ? 'hover:bg-deep-teal-100 cursor-pointer'
+                                : 'cursor-not-allowed opacity-50'
+                            }`}
+                            aria-label={`Paso ${index + 1}: ${step.title}${
+                              isStepCompleted ? ' - Completado' : isStepActive ? ' - Activo' : ''
+                            }`}
+                          >
+                            <div className="flex items-center">
+                              <div
+                                className={`w-6 h-6 rounded-full flex items-center justify-center mr-3 transition-all duration-200 ${
+                                  isStepCompleted
+                                    ? 'bg-medium-jungle-600 scale-100'
+                                    : isStepActive
+                                    ? 'bg-deep-teal-600 scale-110'
+                                    : 'bg-deep-teal-300'
+                                }`}
+                              >
+                                {isStepCompleted ? (
+                                  <Check className="w-4 h-4 text-white animate-scale-in" />
+                                ) : (
+                                  <span className="text-xs text-white font-medium">
+                                    {index + 1}
+                                  </span>
+                                )}
+                              </div>
+                              
+                              <div className="flex-1">
+                                <div className={`font-medium text-sm ${
+                                  isStepCompleted
+                                    ? 'text-medium-jungle-700'
+                                    : isStepActive
+                                    ? 'text-deep-teal-800'
+                                    : 'text-deep-teal-600'
+                                }`}>
+                                  {step.title}
+                                </div>
+                              </div>
+
+                              {isStepActive && (
+                                <ChevronRight className="w-4 h-4 text-deep-teal600 animate-pulse" />
+                              )}
+                            </div>
+                          </button>
+                        </li>
+                      )
+                    })}
+                  </ul>
+                </nav>
+              </div>
+            </div>
         )}
 
         {/* Desktop Progress Sidebar - Superpuesto */}
-        <div className="fixed left-0 top-0 h-full w-80 bg-white border-r border-deep-teal-100 z-40">
+        <div className="hidden lg:block fixed left-0 top-0 h-full w-80 bg-white border-r border-deep-teal-100 z-40">
           <ProgressSidebar
             steps={selectedRoute?.steps || []}
             currentStepIndex={currentStepIndex}
@@ -239,8 +332,10 @@ export function WizardShell({
           />
         </div>
 
-        {/* Main Content - Con margen para sidebar */}
-        <main className="flex-1 ml-80 p-2 overflow-y-auto pb-20">
+        {/* Main Content - Responsive */}
+        <main className={`flex-1 p-2 overflow-y-auto pb-20 transition-all duration-300 ${
+          isMobileMenuOpen ? 'ml-0 lg:ml-80' : 'ml-0 lg:ml-80'
+        }`}>
           <div className="">
             {currentStep && (
               <StepCard
