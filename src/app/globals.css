@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-deep-teal-200;
+  }
+  body {
+    @apply bg-deep-teal-50 text-deep-teal-900 font-poppins;
+  }
+}
+
+@layer components {
+  .step-card {
+    @apply bg-white rounded-lg shadow-sm border border-deep-teal-100 p-6;
+  }
+  
+  .btn-primary {
+    @apply bg-sea-green-600 hover:bg-sea-green-700 text-white font-medium py-2 px-6 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-sea-green-500 focus:ring-offset-2;
+  }
+  
+  .btn-secondary {
+    @apply bg-moss-green-600 hover:bg-moss-green-700 text-white font-medium py-2 px-6 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-moss-green-500 focus:ring-offset-2;
+  }
+  
+  .btn-disabled {
+    @apply bg-deep-teal-200 text-deep-teal-400 font-medium py-2 px-6 rounded-lg cursor-not-allowed;
+  }
+}

@@ -1,0 +1,15 @@
+Este directorio contendrá las imágenes para el manual interactivo.
+
+Las imágenes necesarias son:
+- biblioteca-home.png - Página principal de la Biblioteca Digital
+- formulario-registro.png - Formulario de registro de usuario
+- inicio-sesion.png - Página de inicio de sesión
+- buscador-principal.png - Buscador principal de la Biblioteca Digital
+- filtros-avanzados.png - Panel de filtros avanzados
+- visor-documento.png - Visor de documentos integrado
+- menu-generos.png - Menú de géneros documentales
+- subcategorias.png - Subcategorías dentro de un género
+- favoritos.png - Sección de documentos favoritos
+
+Las imágenes deben tener un aspecto profesional y mostrar claramente
+los elementos de la interfaz de la Biblioteca Digital CARDIQUE.
