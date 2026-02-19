@@ -247,7 +247,7 @@ export function WizardShell({
             {currentStep && (
               <StepCard
                 step={currentStep}
-                animationDirection={animationDirection}
+                animationDirection={animationDirection || 'forward'}
                 onPrevious={onPrevious}
                 onNext={onNext}
                 isFirstStep={currentStepIndex === 0}
