@@ -24,9 +24,13 @@ export function ProgressSidebar({ steps, currentStepIndex, onStepClick, routeNam
   }
 
   return (
-    <div className="hidden lg:block w-80 bg-white border-r border-deep-teal-100 p-6">
+    <div className="w-80 bg-white border-r border-deep-teal-100 p-6 h-full overflow-y-auto">
+      {/* Header del Sidebar */}
       <div className="mb-6">
-        <h2 className="text-lg font-semibold text-deep-teal-800 mb-2">
+        <h1 className="text-lg font-bold text-deep-teal-800 mb-4">
+          Manual interactivo
+        </h1>
+        <h2 className="text-base font-semibold text-deep-teal-700 mb-2">
           Ruta: {routeName}
         </h2>
         <div className="text-sm text-deep-teal-600 mb-4">

@@ -167,7 +167,7 @@ export function WizardShell({
 
   return (
     <div className="min-h-screen bg-deep-teal-50 flex flex-col">
-      <header className="bg-white border-b border-deep-teal-100 px-4 py-4 sticky top-0 z-40">
+      <header className="bg-white border-b border-deep-teal-100 px-4 py-4 sticky top-0 z-30 ml-80">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <div className="flex items-center">
             <button
@@ -181,10 +181,6 @@ export function WizardShell({
                 <Menu className="w-6 h-6 text-deep-teal-600" />
               )}
             </button>
-            
-            <h1 className="text-lg font-bold text-deep-teal-800 ml-4 lg:ml-0">
-              Manual interactivo
-            </h1>
           </div>
 
           {/* Título central - solo visible en desktop */}
@@ -233,16 +229,18 @@ export function WizardShell({
           </>
         )}
 
-        {/* Desktop Progress Sidebar */}
-        <ProgressSidebar
-          steps={selectedRoute?.steps || []}
-          currentStepIndex={currentStepIndex}
-          onStepClick={onStepClick}
-          routeName={selectedRoute?.name || ''}
-        />
+        {/* Desktop Progress Sidebar - Superpuesto */}
+        <div className="fixed left-0 top-0 h-full w-80 bg-white border-r border-deep-teal-100 z-40">
+          <ProgressSidebar
+            steps={selectedRoute?.steps || []}
+            currentStepIndex={currentStepIndex}
+            onStepClick={onStepClick}
+            routeName={selectedRoute?.name || ''}
+          />
+        </div>
 
-        {/* Main Content */}
-        <main className="flex-1 p-2 overflow-y-auto pb-20">
+        {/* Main Content - Con margen para sidebar */}
+        <main className="flex-1 ml-80 p-2 overflow-y-auto pb-20">
           <div className="">
             {currentStep && (
               <StepCard
